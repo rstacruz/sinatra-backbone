@@ -94,8 +94,8 @@ module Sinatra::RestAPI
   # This is the same as `rest_resource`, but only handles *GET* requests.
   #
   def rest_get(path, options={}, &blk)
-    get path do |id|
-      @object = yield(id) or pass
+    get path do |*args|
+      @object = yield(*args) or pass
       rest_respond @object
     end
   end
@@ -105,8 +105,8 @@ module Sinatra::RestAPI
   # requests.
   #
   def rest_edit(path, options={}, &blk)
-    callback = Proc.new { |id|
-      @object = yield(id) or pass
+    callback = Proc.new { |*args|
+      @object = yield(*args) or pass
       rest_params.each { |k, v| @object.send :"#{k}=", v  unless k == 'id' }
       @object.save
       rest_respond @object
@@ -122,8 +122,8 @@ module Sinatra::RestAPI
   # requests. This uses `Model#destroy` on your model.
   #
   def rest_delete(path, options={}, &blk)
-    delete path do |id|
-      @object = yield(id) or pass
+    delete path do |*args|
+      @object = yield(*args) or pass
       @object.destroy
       rest_respond :result => :success
     end

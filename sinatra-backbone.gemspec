@@ -14,5 +14,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "sequel", ">= 3.25.0"
   s.add_development_dependency "sqlite3", ">= 1.3.4"
   s.add_development_dependency "contest"
+  s.add_development_dependency "mocha"
   s.add_development_dependency "rack-test"
 end

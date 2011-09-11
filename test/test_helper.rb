@@ -1,5 +1,6 @@
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'contest'
+require 'mocha'
 require 'sinatra/base'
 require 'sequel'
 require 'rack/test'
