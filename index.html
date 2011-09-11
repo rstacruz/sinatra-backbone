@@ -95,8 +95,6 @@ h1= "Edit "+name
     button Save
 </code></pre>
 
-<p>Currently supports the following templates:</p>
-
 <p><a href="http://github.com/visionmedia/jade">Jade</a> (<code>.jst.jade</code>) -- Jade templates. This requires
 <a href="http://github.com/visionmedia/jade">jade.js</a>. For older browsers, you will also need <a href="https://github.com/douglascrockford/JSON-js">json2.js</a>,
 and an implementation of <a href="http://snippets.dzone.com/posts/show/701">String.prototype.trim</a>.</p>
@@ -136,7 +134,9 @@ Requires <a href="https://github.com/creationix/haml-js">haml.js</a>.</p>
 
 <br class="post-pre">
 
-<section class="api after-pre h3 serve_jst_path_options_class_method"><h3 class="api after-pre" id="serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
+<p class=" after-pre">You can add support for more templates by subclassing <code>Engine</code> (see below).</p>
+
+<section class="api h3 serve_jst_path_options_class_method"><h3 class="api" id="serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
 </h3>
 <p>Serves JST files in given <code>path</code>.</p>
 
