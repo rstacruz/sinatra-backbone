@@ -112,7 +112,7 @@ Requires <a href="https://github.com/creationix/haml-js">haml.js</a>.</p></li>
 <section class=" h4 adding_support_for_new_template_engines"><h4>Adding support for new template engines</h4>
 <pre class=" lang- prettyprint right"><code>module Sinatra::JstPages
   class MyEngine &lt; Engine
-    def function() "My.compile(%s)"; end
+    def function() "My.compile(#{contents.inspect})"; end
   end
 
   register 'my', MyEngine
