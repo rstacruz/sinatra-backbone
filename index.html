@@ -188,7 +188,7 @@ calling <code>object.title = "hello"</code>.</p></li>
 </section><section class="api after-pre h3 rest_resource_path_block_method"><h3 class="api after-pre" id="rest_resource_path_block_method">rest_resource<span class="args">(path, &amp;block)</span> <span class="type">method</span>
 </h3>
 <pre class=" lang- prettyprint right"><code>class App &lt; Sinatra::Base
-  rest_resource "/document/:id" do
+  rest_resource "/document/:id" do |id|
     Document.find(id)
   end
 end
@@ -197,9 +197,6 @@ end
 
 <p>The block given will be yielded to do a record lookup. If the block returns
 <code>nil</code>, RestAPI will return a <em>404</em>.</p>
-
-<p>If you are using Backbone, ensure that you are <em>not</em> setting
-<code>Backbone.emulateHTTP</code> to <code>true</code>.</p>
 
 <p>In the example, it creates routes for <code>/document/:id</code> to accept HTTP <em>GET</em>
 (for object retrieval), <em>PUT</em> (for editing), and <em>DELETE</em> (for destroying).</p>
@@ -214,11 +211,33 @@ end
 <li>
 <code>&lt;attrib_name_here&gt;=</code> (called for each of the attributes on edit)</li>
 </ul>
-<p>See the example.</p>
+<p>If you only want to create routes for only one or two of the actions, you
+may individually use:</p>
+
+<ul>
+<li><code>rest_get</code></li>
+<li><code>rest_edit</code></li>
+<li><code>rest_delete</code></li>
+</ul>
+<p>All the methods above take the same arguments as <code>rest_resource</code>.</p>
 
 <br class="post-pre">
 
-</section><section class="api after-pre h3 json_conversion"><h3 class="api after-pre" id="json_conversion">JSON conversion <span class="type"></span>
+</section><section class="api after-pre h3 rest_get_path_block_method"><h3 class="api after-pre" id="rest_get_path_block_method">rest_get<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</h3>
+<p>This is the same as <code>rest_resource</code>, but only handles <em>GET</em> requests.</p>
+
+</section><section class="api h3 rest_edit_path_block_method"><h3 class="api" id="rest_edit_path_block_method">rest_edit<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</h3>
+<p>This is the same as <code>rest_resource</code>, but only handles <em>PUT</em>/<em>POST</em> (edit)
+requests.</p>
+
+</section><section class="api h3 rest_delete_path_block_method"><h3 class="api" id="rest_delete_path_block_method">rest_delete<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</h3>
+<p>This is the same as <code>rest_resource</code>, but only handles <em>DELETE</em> (edit)
+requests. This uses <code>Model#destroy</code> on your model.</p>
+
+</section><section class="api h3 json_conversion"><h3 class="api" id="json_conversion">JSON conversion <span class="type"></span>
 </h3>
 <p>The <em>create</em> and <em>get</em> routes all need to return objects as JSON. RestAPI
 attempts to convert your model instances to JSON by first trying
