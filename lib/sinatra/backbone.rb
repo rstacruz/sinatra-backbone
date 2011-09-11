@@ -4,7 +4,8 @@ module Sinatra
       "0.1.0.rc1"
     end
 
-    autoload :RestAPI,  "sinatra/restapi"
-    autoload :JstPages, "sinatra/jstpages"
   end
+
+  autoload :RestAPI,  "sinatra/restapi"
+  autoload :JstPages, "sinatra/jstpages"
 end

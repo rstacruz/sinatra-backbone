@@ -152,11 +152,7 @@ module Sinatra::RestAPI
       case request.preferred_type('*/json', '*/xml')
       when '*/json'
         content_type :json
-        rest_convert obj, :to_json
-
-      when '*/xml'
-        content_type :xml
-        rest_convert obj, :to_xml
+        rest_convert_to_json obj
 
       else
         pass
@@ -188,14 +184,19 @@ module Sinatra::RestAPI
       end
     end
 
-    def rest_convert(obj, method)
-      if obj.respond_to?(method)
-        obj.send method
-      elsif obj.respond_to?(:to_hash)
-        obj.to_hash.send method
-      else
-        raise "Can't convert object #{method}"
-      end
+    def rest_convert_to_json(obj)
+      # Convert to JSON. This will almost always work as the JSON lib adds
+      # #to_json to everything.
+      json = obj.to_json
+
+      # The default to_json of objects is to JSONify the #to_s of an object,
+      # which defaults to #inspect. We don't want that.
+      return json  unless json[0..2] == '"#<'
+
+      # Let's hope they redefined to_hash.
+      return obj.to_hash.to_json  if obj.respond_to?(:to_hash)
+
+      raise "Can't convert object to JSON"
     end
   end
 end

@@ -11,4 +11,8 @@ Gem::Specification.new do |s|
   s.executables = Dir["bin/*"].map { |f| File.basename(f) }
 
   s.add_dependency "sinatra"
+  s.add_development_dependency "sequel", ">= 3.25.0"
+  s.add_development_dependency "sqlite3", ">= 1.3.4"
+  s.add_development_dependency "contest"
+  s.add_development_dependency "rack-test"
 end

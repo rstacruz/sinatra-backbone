@@ -88,13 +88,13 @@ module Sinatra
       # Returns a list of JST files.
       def jst_files
         # Tuples of [ name, Engine instance ]
-        tuples = Dir.chdir(Main.views) {
+        tuples = Dir.chdir(settings.views) {
           Dir["**/*.jst.*"].map { |fn|
             fn       =~ %r{^(.*)\.jst\.([^\.]+)$}
             name, ext = $1, $2
             engine    = JstPages.mappings[ext]
 
-            [ name, engine.new(File.join(Main.views, fn)) ]  if engine
+            [ name, engine.new(File.join(settings.views, fn)) ]  if engine
           }.compact
         }
 
