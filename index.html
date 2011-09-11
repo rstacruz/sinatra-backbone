@@ -62,12 +62,13 @@ where the <code>src='...'</code> attribute is the same path you provide to <code
 
 <br class="post-pre">
 
-<pre class=" lang- prettyprint right"><code># views/editor/edit.jst.jade
-h1= "Edit "+name
-  form
-    button Save
+<pre class=" lang- prettyprint right"><code># views/editor/edit.jst.tpl
+&lt;h1&gt;Edit &lt;%= name %&gt;&lt;/h1&gt;
+&lt;form&gt;
+  &lt;button&gt;Save&lt;/button&gt;
+&lt;/form&gt;
 </code></pre>
-<p class=" after-pre">So, if you have a JST view written in Jade, placed in <code>views/editor/edit.jst.jade</code>:</p>
+<p class=" after-pre">So, if you have a JST view placed in <code>views/editor/edit.jst.tpl</code>:</p>
 
 <br class="post-pre">
 
@@ -88,22 +89,54 @@ to a package.  (If you're not using Sinatra AssetPack yet, you probably
 should.)</p>
 
 </section><section class=" h4 supported_templates"><h4>Supported templates</h4>
+<pre class=" lang- prettyprint right"><code># views/editor/edit.jst.jade
+h1= "Edit "+name
+  form
+    button Save
+</code></pre>
 
 <p>Currently supports the following templates:</p>
 
-<ul>
-<li><p><a href="http://github.com/visionmedia/jade">Jade</a> (<code>.jst.jade</code>) -- Jade templates. This requires
+<p><a href="http://github.com/visionmedia/jade">Jade</a> (<code>.jst.jade</code>) -- Jade templates. This requires
 <a href="http://github.com/visionmedia/jade">jade.js</a>. For older browsers, you will also need <a href="https://github.com/douglascrockford/JSON-js">json2.js</a>,
-and an implementation of <a href="http://snippets.dzone.com/posts/show/701">String.prototype.trim</a>.</p></li>
-<li><p><a href="http://documentcloud.github.com/underscore/#template">Underscore templates</a> (<code>.jst.tpl</code>) -- Simple templates by
+and an implementation of <a href="http://snippets.dzone.com/posts/show/701">String.prototype.trim</a>.</p>
+
+<br class="post-pre">
+
+<pre class=" lang- prettyprint right"><code># views/editor/edit.jst.tpl
+&lt;h1&gt;Edit &lt;%= name %&gt;&lt;/h1&gt;
+&lt;form&gt;
+  &lt;button&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<p class=" after-pre"><a href="http://documentcloud.github.com/underscore/#template">Underscore templates</a> (<code>.jst.tpl</code>) -- Simple templates by
 underscore. This requires <a href="http://documentcloud.github.com/underscore">underscore.js</a>, which Backbone also
-requires.</p></li>
-<li><p><a href="https://github.com/creationix/haml-js">Haml.js</a> (<code>.jst.haml</code>) -- A JavaScript implementation of Haml.
-Requires <a href="https://github.com/creationix/haml-js">haml.js</a>.</p></li>
-<li><p><a href="https://github.com/sstephenson/eco">Eco</a> (<code>.jst.eco</code>) -- Embedded CoffeeScript templates. Requires
-<a href="https://github.com/sstephenson/eco">eco.js</a> and <a href="http://coffeescript.org">coffee-script.js</a>.</p></li>
-</ul>
-<section class="api h3 serve_jst_path_options_class_method"><h3 class="api" id="serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
+requires.</p>
+
+<br class="post-pre">
+
+<pre class=" lang- prettyprint right"><code># views/editor/edit.jst.haml
+h1= "Edit "+name
+  form
+    button Save
+</code></pre>
+<p class=" after-pre"><a href="https://github.com/creationix/haml-js">Haml.js</a> (<code>.jst.haml</code>) -- A JavaScript implementation of Haml.
+Requires <a href="https://github.com/creationix/haml-js">haml.js</a>.</p>
+
+<br class="post-pre">
+
+<pre class=" lang- prettyprint right"><code># views/editor/edit.jst.eco
+&lt;h1&gt;Edit &lt;%= name %&gt;&lt;/h1&gt;
+&lt;form&gt;
+  &lt;button&gt;Save&lt;/button&gt;
+&lt;/form&gt;
+</code></pre>
+<p class=" after-pre"><a href="https://github.com/sstephenson/eco">Eco</a> (<code>.jst.eco</code>) -- Embedded CoffeeScript templates. Requires
+<a href="https://github.com/sstephenson/eco">eco.js</a> and <a href="http://coffeescript.org">coffee-script.js</a>.</p>
+
+<br class="post-pre">
+
+<section class="api after-pre h3 serve_jst_path_options_class_method"><h3 class="api after-pre" id="serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
 </h3>
 <p>Serves JST files in given <code>path</code>.</p>
 
