@@ -79,7 +79,7 @@ module Sinatra::RestAPI
   # All the methods above take the same arguments as `rest_resource`.
   #
   #     class App < Sinatra::Base
-  #       rest_resource "/document/:id" do
+  #       rest_resource "/document/:id" do |id|
   #         Document.find(id)
   #       end
   #     end
