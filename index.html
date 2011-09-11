@@ -6,7 +6,9 @@
     <link href="style.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Shanti:400|PT+Sans:700,700italic' rel='stylesheet' type='text/css'>
 </head>
-<body class='literate'>
+<body class='literate github'>
+  
+    <a href="https://github.com/rstacruz/sinatra-backbone"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
   
   <div id='all'>
 
@@ -16,14 +18,24 @@
 <h4>Helpful stuff using Sinatra with Backbone</h4></hgroup><p class=" brief">Do you like <a href="http://documentcloud.github.com/backbone/">Backbone.js</a>? Do you like <a href="http://sinatrarb.com">Sinatra</a>? Did you ever wish you 
 can use them together? Well now you can, with the new Sinatra Backbone!</p>
 
-<p>This is a Ruby gem.</p>
+<section class=" h4 usage"><h4>Usage</h4>
 
-<pre class=" lang- prettyprint"><code>$ gem install sinatra-backbone --pre
-</code></pre>
+<p>This is a Ruby gem.<br><code>$ gem install sinatra-backbone --pre</code></p>
 
+<p>Or do you use Bundler?<br><code>gem 'sinatra-backbone', :require =&gt; 'sinatra/backbone'</code></p>
+
+<section class=" h2 contents"><h2 id="contents">Contents</h2>
+
+<p><strong>Sinatra-backbone</strong> is comprised of two Sinatra plugins:</p>
+
+<ul>
+<li><p><code>Sinatra::JstPages</code> – Provides support for JavaScript server templates (JST) 
+for use in Backbone views.</p></li>
+<li><p><code>Sinatra::RestAPI</code> – Provides restful API for your models for use in Backbone 
+models.</p></li>
+</ul>
 <p>
-</p>
-<section class="api h2 sinatra_jstpages_module"><h2 class="api" id="sinatra_jstpages_module">Sinatra::JstPages <span class="type">module</span>
+</p></section><section class="api h2 sinatra_jstpages_module"><h2 class="api" id="sinatra_jstpages_module">Sinatra::JstPages <span class="type">module</span>
 </h2>
 <p>A Sinatra plugin that adds support for JST (JavaScript Server Templates).</p>
 
@@ -134,7 +146,9 @@ called with an object hash of the params to be passed onto the template.</p>
 
 </section></section></section><section class="api h2 sinatra_restapi_module"><h2 class="api" id="sinatra_restapi_module">Sinatra::RestAPI <span class="type">module</span>
 </h2>
-<pre class=" lang- prettyprint right"><code>class App &lt; Sinatra::Base
+<pre class=" lang- prettyprint right"><code>require 'sinatra/restapi'
+
+class App &lt; Sinatra::Base
   register Sinatra::RestAPI
 end
 </code></pre>
@@ -145,15 +159,7 @@ use <code>rest_create</code> and <code>rest_resource</code> to create your route
 
 <br class="post-pre">
 
-<section class=" after-pre h3 json_conversion"><h3 id="json_conversion" class=" after-pre">JSON conversion</h3>
-
-<p>The <em>create</em> and <em>get</em> routes all need to return objects as JSON. RestAPI
-attempts to convert your model instances to JSON by first trying
-<code>object.to_json</code> on it, then trying <code>object.to_hash.to_json</code>.</p>
-
-<p>It's recommended you implement <code>#to_hash</code> in your models.</p>
-
-</section><section class="api h3 rest_create_path_block_method"><h3 class="api" id="rest_create_path_block_method">rest_create<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+<section class="api after-pre h3 rest_create_path_block_method"><h3 class="api after-pre" id="rest_create_path_block_method">rest_create<span class="args">(path, &amp;block)</span> <span class="type">method</span>
 </h3>
 <pre class=" lang- prettyprint right"><code>class App &lt; Sinatra::Base
   rest_create "/documents" do
@@ -214,7 +220,15 @@ end
 
 <br class="post-pre">
 
-</section><section class="api after-pre h3 helper_methods"><h3 class="api after-pre" id="helper_methods">Helper methods <span class="type"></span>
+</section><section class="api after-pre h3 json_conversion"><h3 class="api after-pre" id="json_conversion">JSON conversion <span class="type"></span>
+</h3>
+<p>The <em>create</em> and <em>get</em> routes all need to return objects as JSON. RestAPI
+attempts to convert your model instances to JSON by first trying
+<code>object.to_json</code> on it, then trying <code>object.to_hash.to_json</code>.</p>
+
+<p>It's recommended you implement <code>#to_hash</code> in your models.</p>
+
+</section><section class="api h3 helper_methods"><h3 class="api" id="helper_methods">Helper methods <span class="type"></span>
 </h3>
 <p>There are some helper methods that are used internally be <code>RestAPI</code>,
 but you can use them too if you need them.</p>
@@ -257,7 +271,7 @@ from it's <a href="http://github.com/rstacruz/xxxxx">contributors</a>. It is spo
 <a href="http://github.com/rstacruz">Github</a> (@rstacruz)</li>
 <li>
 <a href="http://twitter.com/rstacruz">Twitter</a> (@rstacruz)</li>
-</ul></section></div>
+</ul></section></section></div>
   <script type='text/javascript' src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js'></script>
   <script>prettyPrint();</script>
 </body>
