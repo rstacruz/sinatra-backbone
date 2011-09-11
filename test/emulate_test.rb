@@ -18,6 +18,7 @@ class EmulateTest < UnitTest
   test "emulate json and emulate http" do
     FauxModel.any_instance.expects(:two=).times(1).returns(true)
     FauxModel.any_instance.expects(:save).times(1).returns(true)
+    FauxModel.any_instance.expects(:valid?).times(1).returns(true)
     FauxModel.any_instance.expects(:to_hash).times(1).returns('a' => 'b')
 
     post "/api/2", :model => { :two => 2 }.to_json

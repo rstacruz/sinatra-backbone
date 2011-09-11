@@ -50,7 +50,7 @@ class AppTest < UnitTest
     test "validation fail" do
       hash = { :name => "The Claiming of Sleeping Beauty" }
       post "/book", :model => hash.to_json
-      p last_response
+      assert last_response.status != 200
     end
 
     test "should 404" do

@@ -31,6 +31,7 @@ class ArityTest < UnitTest
 
     test "put/post" do
       FauxModel.any_instance.expects(:x=).times(1).returns(true)
+      FauxModel.any_instance.expects(:valid?).times(1).returns(true)
       FauxModel.any_instance.expects(:save).times(1).returns(true)
 
       header 'Accept', 'application/json, */*'
