@@ -1,5 +1,5 @@
 # Sinatra-backbone
-#### Helpful stuff using Sinatra with Backbone
+#### Neat integration of Backbone.js with Sinatra
 
 Do you like [Backbone.js][bb]? Do you like [Sinatra][sn]? Did you ever wish you 
 can use them together? Well now you can, with the new Sinatra Backbone!
@@ -26,7 +26,8 @@ __Sinatra-backbone__ is comprised of two Sinatra plugins:
  * `Sinatra::RestAPI` – Provides restful API for your models for use in Backbone 
  models.
 
-(API reference goes here)
+For usage and API reference, please see http://ricostacruz.com/sinatra-backbone.  
+[](#api_reference)
 
 Acknowledgements
 ----------------
