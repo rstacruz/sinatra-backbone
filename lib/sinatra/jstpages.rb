@@ -1,5 +1,6 @@
 # ## Sinatra::JstPages [module]
 # A Sinatra plugin that adds support for JST (JavaScript Server Templates).
+# See [JstPages example][jstx] for a full example application.
 #
 # #### Basic usage
 # Register the `Sinatra::JstPages` plugin in your application, and use
@@ -67,6 +68,7 @@
 # [haml]: https://github.com/creationix/haml-js
 # [eco]: https://github.com/sstephenson/eco
 # [cs]: http://coffeescript.org
+# [jstx]: https://github.com/rstacruz/sinatra-backbone/examples/jstpages
 #
 module Sinatra
   module JstPages

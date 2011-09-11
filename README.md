@@ -21,10 +21,14 @@ Contents
 __Sinatra-backbone__ is comprised of two Sinatra plugins:
 
  * `Sinatra::JstPages` – Provides support for JavaScript server templates (JST) 
-  for use in Backbone views.
+  for use in Backbone views. See [JstPages example][jstx] for a full example 
+  application.
 
  * `Sinatra::RestAPI` – Provides restful API for your models for use in Backbone 
- models.
+ models. See [RestAPI example][restx] for a full example application.
+
+[jstx]: https://github.com/rstacruz/sinatra-backbone/examples/jstpages
+[restx]: https://github.com/rstacruz/sinatra-backbone/examples/restapi
 
 For usage and API reference, please see http://ricostacruz.com/sinatra-backbone. [](#api_reference)
 
