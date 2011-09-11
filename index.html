@@ -367,13 +367,24 @@ requests. This uses <code>Model#destroy</code> on your model.</p>
 
 </section><section class="api h3 json_conversion"><h3 class="api" id="json_conversion">JSON conversion <span class="type"></span>
 </h3>
+<pre class=" lang- prettyprint right"><code>class Album &lt; Sequel::Model
+  def to_hash
+    { :id     =&gt; id,
+      :title  =&gt; title,
+      :artist =&gt; artist,
+      :year   =&gt; year }
+  end
+end
+</code></pre>
 <p>The <em>create</em> and <em>get</em> routes all need to return objects as JSON. RestAPI
 attempts to convert your model instances to JSON by first trying
 <code>object.to_json</code> on it, then trying <code>object.to_hash.to_json</code>.</p>
 
 <p>It's recommended you implement <code>#to_hash</code> in your models.</p>
 
-</section><section class="api h3 helper_methods"><h3 class="api" id="helper_methods">Helper methods <span class="type"></span>
+<br class="post-pre">
+
+</section><section class="api after-pre h3 helper_methods"><h3 class="api after-pre" id="helper_methods">Helper methods <span class="type"></span>
 </h3>
 <p>There are some helper methods that are used internally be <code>RestAPI</code>,
 but you can use them too if you need them.</p>
