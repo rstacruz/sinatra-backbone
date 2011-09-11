@@ -20,12 +20,13 @@
 # 
 #     <script type='text/javascript' src='/jst.js'></script>
 #
-# So, if you have a JST view written in Jade, placed in `views/editor/edit.jst.jade`:
+# So, if you have a JST view placed in `views/editor/edit.jst.tpl`:
 #
-#     # views/editor/edit.jst.jade
-#     h1= "Edit "+name
-#       form
-#         button Save
+#     # views/editor/edit.jst.tpl
+#     <h1>Edit <%= name %></h1>
+#     <form>
+#       <button>Save</button>
+#     </form>
 #
 # Now in your browser you may invoke `JST['templatename']`:
 #
@@ -44,21 +45,44 @@
 # [sap]: http://ricostacruz.com/sinatra-assetpack
 #
 # #### Supported templates
-# Currently supports the following templates:
 #
-# * [Jade][jade] (`.jst.jade`) -- Jade templates. This requires
+# [Jade][jade] (`.jst.jade`) -- Jade templates. This requires
 # [jade.js][jade]. For older browsers, you will also need [json2.js][json2],
 # and an implementation of [String.prototype.trim][trim].
 #
-# * [Underscore templates][under_tpl] (`.jst.tpl`) -- Simple templates by
+#     # views/editor/edit.jst.jade
+#     h1= "Edit "+name
+#       form
+#         button Save
+#
+# [Underscore templates][under_tpl] (`.jst.tpl`) -- Simple templates by
 # underscore. This requires [underscore.js][under], which Backbone also
 # requires.
 #
-# * [Haml.js][haml] (`.jst.haml`) -- A JavaScript implementation of Haml.
+#     # views/editor/edit.jst.tpl
+#     <h1>Edit <%= name %></h1>
+#     <form>
+#       <button>Save</button>
+#     </form>
+#
+# [Haml.js][haml] (`.jst.haml`) -- A JavaScript implementation of Haml.
 # Requires [haml.js][haml].
 #
-# * [Eco][eco] (`.jst.eco`) -- Embedded CoffeeScript templates. Requires
+#     # views/editor/edit.jst.haml
+#     h1= "Edit "+name
+#       form
+#         button Save
+#
+# [Eco][eco] (`.jst.eco`) -- Embedded CoffeeScript templates. Requires
 # [eco.js][eco] and [coffee-script.js][cs].
+#
+#     # views/editor/edit.jst.eco
+#     <h1>Edit <%= name %></h1>
+#     <form>
+#       <button>Save</button>
+#     </form>
+#
+# You can add support for more templates by subclassing `Engine` (see below).
 #
 # [jade]: http://github.com/visionmedia/jade
 # [json2]: https://github.com/douglascrockford/JSON-js
