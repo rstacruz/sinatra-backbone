@@ -159,7 +159,8 @@ use <code>rest_create</code> and <code>rest_resource</code> to create your route
 
 <section class=" after-pre h3 restapi_example"><h3 id="restapi_example" class=" after-pre">RestAPI example</h3>
 
-<p>Here's a simple example of how to use Backbone models with RestAPI.</p>
+<p>Here's a simple example of how to use Backbone models with RestAPI.
+Also see the <a href="https://github.com/rstacruz/sinatra-backbone/tree/master/examples/restapi">example application</a> included in the gem.</p>
 
 <section class=" h4 model_setup"><h4>Model setup</h4>
 <pre class=" lang- prettyprint right"><code>db = Sequel.connect(...)
@@ -172,11 +173,17 @@ end
 
 class Book &lt; Sequel::Model
   # ...
+  def to_hash
+    { :title =&gt; title, :author =&gt; author, :id =&gt; id }
+  end
 end
 </code></pre>
 
 <p>Let's say you have a <code>Book</code> model in your application. Let's use <a href="http://sequel.rubyforge.org">Sequel</a>
-for this example, but feel free to use any other ORM.</p>
+for this example, but feel free to use any other ORM that is
+ActiveModel-compatible.</p>
+
+<p>You will need to define <code>to_hash</code> in your model.</p>
 
 <br class="post-pre">
 
@@ -214,6 +221,12 @@ end
 <pre class=" lang- prettyprint right"><code>book = new Book;
 book.set({ title: "Darkly Dreaming Dexter", author: "Jeff Lindsay" });
 book.save();
+
+// In Ruby, equivalent to:
+// book = Book.new
+// book.title  = "Darkly Dreaming Dexter"
+// book.author = "Jeff Lindsay"
+// book.save
 </code></pre>
 <p class=" after-pre">Now you may create a new book through your JavaScript:</p>
 
@@ -221,6 +234,9 @@ book.save();
 
 <pre class=" lang- prettyprint right"><code>book = new Book({ id: 1 });
 book.fetch();
+
+// In Ruby, equivalent to:
+// Book.find(:id =&gt; 1)
 </code></pre>
 <p class=" after-pre">Or you may retrieve new items. Note that in this example, since we defined
 <code>urlRoot()</code> but not <code>url()</code>, the model URL with default to <code>/[urlRoot]/[id]</code>.</p>
@@ -254,7 +270,8 @@ call it <code>object</code>.)</p></li>
 <li><p>For each of the attributes, it uses the <code>attrib_name=</code> method in
 your record. For instance, for an attrib like <code>title</code>, it wil lbe
 calling <code>object.title = "hello"</code>.</p></li>
-<li><p><code>object.save</code> will be called.</p></li>
+<li><p>if <code>object.valid?</code> returns false, it returns an error 400.</p></li>
+<li><p><code>object.save</code> will then be called.</p></li>
 <li><p><code>object</code>'s contents will then be returned to the client as JSON.</p></li>
 </ul>
 <p>See the example.</p>
