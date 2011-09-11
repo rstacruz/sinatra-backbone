@@ -46,7 +46,7 @@
 #
 # #### Supported templates
 #
-# [Jade][jade] (`.jst.jade`) -- Jade templates. This requires
+# __[Jade][jade]__ (`.jst.jade`) -- Jade templates. This requires
 # [jade.js][jade]. For older browsers, you will also need [json2.js][json2],
 # and an implementation of [String.prototype.trim][trim].
 #
@@ -55,7 +55,7 @@
 #       form
 #         button Save
 #
-# [Underscore templates][under_tpl] (`.jst.tpl`) -- Simple templates by
+# __[Underscore templates][under_tpl]__ (`.jst.tpl`) -- Simple templates by
 # underscore. This requires [underscore.js][under], which Backbone also
 # requires.
 #
@@ -65,15 +65,15 @@
 #       <button>Save</button>
 #     </form>
 #
-# [Haml.js][haml] (`.jst.haml`) -- A JavaScript implementation of Haml.
+# __[Haml.js][haml]__ (`.jst.haml`) -- A JavaScript implementation of Haml.
 # Requires [haml.js][haml].
 #
 #     # views/editor/edit.jst.haml
-#     h1= "Edit "+name
-#       form
-#         button Save
+#     %h1= "Edit "+name
+#       %form
+#         %button Save
 #
-# [Eco][eco] (`.jst.eco`) -- Embedded CoffeeScript templates. Requires
+# __[Eco][eco]__ (`.jst.eco`) -- Embedded CoffeeScript templates. Requires
 # [eco.js][eco] and [coffee-script.js][cs].
 #
 #     # views/editor/edit.jst.eco
@@ -82,7 +82,7 @@
 #       <button>Save</button>
 #     </form>
 #
-# You can add support for more templates by subclassing `Engine` (see below).
+# You can add support for more templates by subclassing the `Engine` class.
 #
 # [jade]: http://github.com/visionmedia/jade
 # [json2]: https://github.com/douglascrockford/JSON-js
@@ -92,7 +92,7 @@
 # [haml]: https://github.com/creationix/haml-js
 # [eco]: https://github.com/sstephenson/eco
 # [cs]: http://coffeescript.org
-# [jstx]: https://github.com/rstacruz/sinatra-backbone/examples/jstpages
+# [jstx]: https://github.com/rstacruz/sinatra-backbone/tree/master/examples/jstpages
 #
 module Sinatra
   module JstPages
