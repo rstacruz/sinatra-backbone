@@ -144,7 +144,7 @@ end
 #
 #     module Sinatra::JstPages
 #       class MyEngine < Engine
-#         def function() "My.compile(%s)"; end
+#         def function() "My.compile(#{contents.inspect})"; end
 #       end
 #
 #       register 'my', MyEngine
