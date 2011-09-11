@@ -223,7 +223,16 @@ module Sinatra::RestAPI
   # attempts to convert your model instances to JSON by first trying
   # `object.to_json` on it, then trying `object.to_hash.to_json`.
   #
-  # It's recommended you implement `#to_hash` in your models.
+  # You will need to implement `#to_hash` or `#to_json` in your models.
+  #
+  #     class Album < Sequel::Model
+  #       def to_hash
+  #         { :id     => id,
+  #           :title  => title,
+  #           :artist => artist,
+  #           :year   => year }
+  #       end
+  #     end
 
   # ### Helper methods
   # There are some helper methods that are used internally be `RestAPI`,
@@ -284,7 +293,7 @@ module Sinatra::RestAPI
       # Let's hope they redefined to_hash.
       return obj.to_hash.to_json  if obj.respond_to?(:to_hash)
 
-      raise "Can't convert object to JSON"
+      raise "Can't convert object to JSON. Consider implementing #to_hash to #{obj.class.name}."
     end
   end
 end
