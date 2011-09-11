@@ -167,7 +167,7 @@ module Sinatra::RestAPI
     #
     # If the client sent a standard URL-encoded POST with a `model` key
     # (happens when Backbone uses `Backbone.emulateJSON = true`), it tries
-    # to parse it's key as JSON.
+    # to parse its value as JSON.
     #
     # Otherwise, the params will be returned as is.
     #
