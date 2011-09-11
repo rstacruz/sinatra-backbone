@@ -12,6 +12,68 @@ require 'json'
 #       register Sinatra::RestAPI
 #     end
 #
+# ### RestAPI example
+# Here's a simple example of how to use Backbone models with RestAPI.
+#
+# #### Model setup
+# Let's say you have a `Book` model in your application. Let's use [Sequel][sq]
+# for this example, but feel free to use any other ORM.
+#
+#     db = Sequel.connect(...)
+#
+#     db.create_table :books do
+#       primary_key :id
+#       String :title
+#       String :author
+#     end
+#
+#     class Book < Sequel::Model
+#       # ...
+#     end
+#
+# [sq]: http://sequel.rubyforge.org
+#
+# #### Sinatra
+# To provide some routes for Backbone models, use `rest_resource` and
+# `rest_create`:
+#
+#     require 'sinatra/restapi'
+#
+#     class App < Sinatra::Base
+#       register Sinatra::RestAPI
+#
+#       rest_create '/book' do
+#         Book.new
+#       end
+#
+#       rest_resource '/book/:id' do |id|
+#         Book.find(:id => id)
+#       end
+#     end
+#
+# #### JavaScript
+# In your JavaScript files, let's make a corresponding model.
+#
+#     Book = Backbone.Model.extend({
+#       urlRoot: '/book'
+#     });
+#
+# Now you may create a new book through your JavaScript:
+#
+#     book = new Book;
+#     book.set({ title: "Darkly Dreaming Dexter", author: "Jeff Lindsay" });
+#     book.save();
+#
+# Or you may retrieve new items. Note that in this example, since we defined
+# `urlRoot()` but not `url()`, the model URL with default to `/[urlRoot]/[id]`.
+#
+#     book = new Book({ id: 1 });
+#     book.fetch();
+#
+# Deletes will work just like how you would expect it:
+#
+#     book.destroy();
+#
 module Sinatra::RestAPI
   def self.registered(app)
     app.helpers Helpers
@@ -80,7 +142,7 @@ module Sinatra::RestAPI
   #
   #     class App < Sinatra::Base
   #       rest_resource "/document/:id" do |id|
-  #         Document.find(id)
+  #         Document.find(:id => id)
   #       end
   #     end
   #
