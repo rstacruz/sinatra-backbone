@@ -59,9 +59,6 @@ module Sinatra::RestAPI
   #
   # The block given will be yielded to do a record lookup. If the block returns
   # `nil`, RestAPI will return a *404*.
-  #  
-  # If you are using Backbone, ensure that you are *not* setting
-  # `Backbone.emulateHTTP` to `true`.
   #
   # In the example, it creates routes for `/document/:id` to accept HTTP *GET*
   # (for object retrieval), *PUT* (for editing), and *DELETE* (for destroying).
@@ -72,7 +69,14 @@ module Sinatra::RestAPI
   #    * `destroy` (called on delete)
   #    * `<attrib_name_here>=` (called for each of the attributes on edit)
   #
-  # See the example.
+  # If you only want to create routes for only one or two of the actions, you
+  # may individually use:
+  #
+  #    * `rest_get`
+  #    * `rest_edit`
+  #    * `rest_delete`
+  #
+  # All the methods above take the same arguments as `rest_resource`.
   #
   #     class App < Sinatra::Base
   #       rest_resource "/document/:id" do
@@ -81,24 +85,45 @@ module Sinatra::RestAPI
   #     end
   #
   def rest_resource(path, options={}, &blk)
-    before path do |id|
-      @object = yield(id) or pass
-    end
+    rest_get    path, options, &blk
+    rest_edit   path, options, &blk
+    rest_delete path, options, &blk
+  end
 
-    # Get
+  # ### rest_get(path, &block) [method]
+  # This is the same as `rest_resource`, but only handles *GET* requests.
+  #
+  def rest_get(path, options={}, &blk)
     get path do |id|
+      @object = yield(id) or pass
       rest_respond @object
     end
+  end
 
-    # Edit
-    put path do |id|
+  # ### rest_edit(path, &block) [method]
+  # This is the same as `rest_resource`, but only handles *PUT*/*POST* (edit)
+  # requests.
+  #
+  def rest_edit(path, options={}, &blk)
+    callback = Proc.new { |id|
+      @object = yield(id) or pass
       rest_params.each { |k, v| @object.send :"#{k}=", v  unless k == 'id' }
       @object.save
       rest_respond @object
-    end
+    }
 
-    # Delete
+    # Make it work with `Backbone.emulateHTTP` on.
+    put  path, &callback
+    post path, &callback
+  end
+
+  # ### rest_delete(path, &block) [method]
+  # This is the same as `rest_resource`, but only handles *DELETE* (edit)
+  # requests. This uses `Model#destroy` on your model.
+  #
+  def rest_delete(path, options={}, &blk)
     delete path do |id|
+      @object = yield(id) or pass
       @object.destroy
       rest_respond :result => :success
     end

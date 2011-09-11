@@ -26,8 +26,7 @@ __Sinatra-backbone__ is comprised of two Sinatra plugins:
  * `Sinatra::RestAPI` – Provides restful API for your models for use in Backbone 
  models.
 
-For usage and API reference, please see http://ricostacruz.com/sinatra-backbone.  
-[](#api_reference)
+For usage and API reference, please see http://ricostacruz.com/sinatra-backbone. [](#api_reference)
 
 Acknowledgements
 ----------------
