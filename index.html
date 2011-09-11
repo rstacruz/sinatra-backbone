@@ -157,7 +157,83 @@ use <code>rest_create</code> and <code>rest_resource</code> to create your route
 
 <br class="post-pre">
 
-<section class="api after-pre h3 rest_create_path_block_method"><h3 class="api after-pre" id="rest_create_path_block_method">rest_create<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+<section class=" after-pre h3 restapi_example"><h3 id="restapi_example" class=" after-pre">RestAPI example</h3>
+
+<p>Here's a simple example of how to use Backbone models with RestAPI.</p>
+
+<section class=" h4 model_setup"><h4>Model setup</h4>
+<pre class=" lang- prettyprint right"><code>db = Sequel.connect(...)
+
+db.create_table :books do
+  primary_key :id
+  String :title
+  String :author
+end
+
+class Book &lt; Sequel::Model
+  # ...
+end
+</code></pre>
+
+<p>Let's say you have a <code>Book</code> model in your application. Let's use <a href="http://sequel.rubyforge.org">Sequel</a>
+for this example, but feel free to use any other ORM.</p>
+
+<br class="post-pre">
+
+</section><section class=" after-pre h4 sinatra"><h4 class=" after-pre">Sinatra</h4>
+<pre class=" lang- prettyprint right"><code>require 'sinatra/restapi'
+
+class App &lt; Sinatra::Base
+  register Sinatra::RestAPI
+
+  rest_create '/book' do
+    Book.new
+  end
+
+  rest_resource '/book/:id' do |id|
+    Book.find(:id =&gt; id)
+  end
+end
+</code></pre>
+
+<p>To provide some routes for Backbone models, use <code>rest_resource</code> and
+<code>rest_create</code>:</p>
+
+<br class="post-pre">
+
+</section><section class=" after-pre h4 javascript"><h4 class=" after-pre">JavaScript</h4>
+<pre class=" lang- prettyprint right"><code>Book = Backbone.Model.extend({
+  urlRoot: '/book'
+});
+</code></pre>
+
+<p>In your JavaScript files, let's make a corresponding model.</p>
+
+<br class="post-pre">
+
+<pre class=" lang- prettyprint right"><code>book = new Book;
+book.set({ title: "Darkly Dreaming Dexter", author: "Jeff Lindsay" });
+book.save();
+</code></pre>
+<p class=" after-pre">Now you may create a new book through your JavaScript:</p>
+
+<br class="post-pre">
+
+<pre class=" lang- prettyprint right"><code>book = new Book({ id: 1 });
+book.fetch();
+</code></pre>
+<p class=" after-pre">Or you may retrieve new items. Note that in this example, since we defined
+<code>urlRoot()</code> but not <code>url()</code>, the model URL with default to <code>/[urlRoot]/[id]</code>.</p>
+
+<br class="post-pre">
+
+<pre class=" lang- prettyprint right"><code>book.destroy();
+</code></pre>
+<p class=" after-pre">Deletes will work just like how you would expect it:</p>
+
+<br class="post-pre">
+
+</section></section><section class="api after-pre h3 rest_create_path_block_method"><h3 class="api after-pre" id="rest_create_path_block_method">rest_create<span class="args">(path, &amp;block)</span> <span class="type">method</span>
 </h3>
 <pre class=" lang- prettyprint right"><code>class App &lt; Sinatra::Base
   rest_create "/documents" do
@@ -189,7 +265,7 @@ calling <code>object.title = "hello"</code>.</p></li>
 </h3>
 <pre class=" lang- prettyprint right"><code>class App &lt; Sinatra::Base
   rest_resource "/document/:id" do |id|
-    Document.find(id)
+    Document.find(:id =&gt; id)
   end
 end
 </code></pre>
