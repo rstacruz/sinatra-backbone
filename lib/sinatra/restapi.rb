@@ -14,10 +14,16 @@ require 'json'
 #
 # ### RestAPI example
 # Here's a simple example of how to use Backbone models with RestAPI.
+# Also see the [example application][ex] included in the gem.
+#
+# [ex]: https://github.com/rstacruz/sinatra-backbone/tree/master/examples/restapi
 #
 # #### Model setup
 # Let's say you have a `Book` model in your application. Let's use [Sequel][sq]
-# for this example, but feel free to use any other ORM.
+# for this example, but feel free to use any other ORM that is
+# ActiveModel-compatible.
+#
+# You will need to define `to_hash` in your model.
 #
 #     db = Sequel.connect(...)
 #
@@ -29,6 +35,9 @@ require 'json'
 #
 #     class Book < Sequel::Model
 #       # ...
+#       def to_hash
+#         { :title => title, :author => author, :id => id }
+#       end
 #     end
 #
 # [sq]: http://sequel.rubyforge.org
@@ -64,11 +73,20 @@ require 'json'
 #     book.set({ title: "Darkly Dreaming Dexter", author: "Jeff Lindsay" });
 #     book.save();
 #
+#     // In Ruby, equivalent to:
+#     // book = Book.new
+#     // book.title  = "Darkly Dreaming Dexter"
+#     // book.author = "Jeff Lindsay"
+#     // book.save
+#
 # Or you may retrieve new items. Note that in this example, since we defined
 # `urlRoot()` but not `url()`, the model URL with default to `/[urlRoot]/[id]`.
 #
 #     book = new Book({ id: 1 });
 #     book.fetch();
+#
+#     // In Ruby, equivalent to:
+#     // Book.find(:id => 1)
 #
 # Deletes will work just like how you would expect it:
 #
@@ -94,7 +112,9 @@ module Sinatra::RestAPI
   #    your record. For instance, for an attrib like `title`, it wil lbe
   #    calling `object.title = "hello"`.
   #
-  #  * `object.save` will be called.
+  #  * if `object.valid?` returns false, it returns an error 400.
+  #
+  #  * `object.save` will then be called.
   #
   #  * `object`'s contents will then be returned to the client as JSON.
   #
@@ -111,6 +131,9 @@ module Sinatra::RestAPI
     post path do
       @object = yield
       rest_params.each { |k, v| @object.send :"#{k}=", v }
+
+      return 400, @object.errors.to_json  unless @object.valid?
+
       @object.save
       rest_respond @object.to_hash
     end
@@ -170,6 +193,9 @@ module Sinatra::RestAPI
     callback = Proc.new { |*args|
       @object = yield(*args) or pass
       rest_params.each { |k, v| @object.send :"#{k}=", v  unless k == 'id' }
+
+      return 400, @object.errors.to_json  unless @object.valid?
+
       @object.save
       rest_respond @object
     }
