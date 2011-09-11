@@ -380,7 +380,7 @@ end
 attempts to convert your model instances to JSON by first trying
 <code>object.to_json</code> on it, then trying <code>object.to_hash.to_json</code>.</p>
 
-<p>It's recommended you implement <code>#to_hash</code> in your models.</p>
+<p>You will need to implement <code>#to_hash</code> or <code>#to_json</code> in your models.</p>
 
 <br class="post-pre">
 
