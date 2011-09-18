@@ -6,7 +6,7 @@
     <link href="style.css" rel="stylesheet" />
     <link href='http://fonts.googleapis.com/css?family=Shanti:400|PT+Sans:700,700italic' rel='stylesheet' type='text/css'>
 </head>
-<body class='literate github'>
+<body class='literate toc github'>
   
     <a href="https://github.com/rstacruz/sinatra-backbone"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/e6bef7a091f5f3138b8cd40bc3e114258dd68ddf/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub"></a>
   
@@ -24,7 +24,7 @@ can use them together? Well now you can, with the new Sinatra Backbone!</p>
 
 <p>Or do you use Bundler?<br><code>gem 'sinatra-backbone', :require =&gt; 'sinatra/backbone'</code></p>
 
-<section class=" h2 contents"><h2 id="contents">Contents</h2>
+</section><section class=" h2 contents"><h2 id="contents">Contents</h2>
 
 <p><strong>Sinatra-backbone</strong> is comprised of two Sinatra plugins:</p>
 
@@ -136,11 +136,11 @@ Requires <a href="https://github.com/creationix/haml-js">haml.js</a>.</p>
 
 <p class=" after-pre">You can add support for more templates by subclassing the <code>Engine</code> class.</p>
 
-<section class="api h3 serve_jst_path_options_class_method"><h3 class="api" id="serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
+</section><section class="api h3 serve_jst_path_options_class_method"><h3 class="api" id="serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
 </h3>
 <p>Serves JST files in given <code>path</code>.</p>
 
-</section></section></section><section class="api h2 sinatra_jstpages_engine_class"><h2 class="api" id="sinatra_jstpages_engine_class">Sinatra::JstPages::Engine <span class="type">class</span>
+</section></section><section class="api h2 sinatra_jstpages_engine_class"><h2 class="api" id="sinatra_jstpages_engine_class">Sinatra::JstPages::Engine <span class="type">class</span>
 </h2>
 <p>A template engine.</p>
 
@@ -162,7 +162,7 @@ then use <code>JstPages.register</code>.</p>
 
 <br class="post-pre">
 
-<section class="api after-pre h3 file_attribute"><h3 class="api after-pre" id="file_attribute">file <span class="type">attribute</span>
+</section><section class="api after-pre h3 file_attribute"><h3 class="api after-pre" id="file_attribute">file <span class="type">attribute</span>
 </h3>
 <p>The string path of the template file.</p>
 
@@ -177,7 +177,7 @@ then use <code>JstPages.register</code>.</p>
 <p>What this returns should, in JavaScript, return a function that can be
 called with an object hash of the params to be passed onto the template.</p>
 
-</section></section></section><section class="api h2 sinatra_restapi_module"><h2 class="api" id="sinatra_restapi_module">Sinatra::RestAPI <span class="type">module</span>
+</section></section><section class="api h2 sinatra_restapi_module"><h2 class="api" id="sinatra_restapi_module">Sinatra::RestAPI <span class="type">module</span>
 </h2>
 <pre class=" lang- prettyprint right"><code>require 'sinatra/restapi'
 
@@ -427,7 +427,42 @@ from it's <a href="http://github.com/rstacruz/xxxxx">contributors</a>. It is spo
 <a href="http://github.com/rstacruz">Github</a> (@rstacruz)</li>
 <li>
 <a href="http://twitter.com/rstacruz">Twitter</a> (@rstacruz)</li>
-</ul></section></section></div>
+</ul></section><aside id="toc"><h1>Sinatra-backbone</h1>
+<nav class="level-2"><h3><a href="#contents">Contents</a></h3>
+<ul></ul></nav><nav class="level-2"><h3><a href="#sinatra_jstpages_module">Sinatra::JstPages <span class="type">module</span>
+</a></h3>
+<ul>
+<li><a href="#serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
+</a></li>
+</ul></nav><nav class="level-2"><h3><a href="#sinatra_jstpages_engine_class">Sinatra::JstPages::Engine <span class="type">class</span>
+</a></h3>
+<ul>
+<li><a href="#file_attribute">file <span class="type">attribute</span>
+</a></li>
+<li><a href="#contents_method">contents <span class="type">method</span>
+</a></li>
+<li><a href="#function_method">function <span class="type">method</span>
+</a></li>
+</ul></nav><nav class="level-2"><h3><a href="#sinatra_restapi_module">Sinatra::RestAPI <span class="type">module</span>
+</a></h3>
+<ul>
+<li><a href="#restapi_example">RestAPI example</a></li>
+<li><a href="#rest_create_path_block_method">rest_create<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</a></li>
+<li><a href="#rest_resource_path_block_method">rest_resource<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</a></li>
+<li><a href="#rest_get_path_block_method">rest_get<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</a></li>
+<li><a href="#rest_edit_path_block_method">rest_edit<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</a></li>
+<li><a href="#rest_delete_path_block_method">rest_delete<span class="args">(path, &amp;block)</span> <span class="type">method</span>
+</a></li>
+<li><a href="#json_conversion">JSON conversion <span class="type"></span>
+</a></li>
+<li><a href="#helper_methods">Helper methods <span class="type"></span>
+</a></li>
+</ul></nav><nav class="level-2"><h3><a href="#acknowledgements">Acknowledgements</a></h3>
+<ul></ul></nav></aside></div>
   <script type='text/javascript' src='http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js'></script>
   <script>prettyPrint();</script>
 </body>
