@@ -18,7 +18,7 @@ namespace :doc do
   desc "Builds documentation"
   task :build do
     # github.com/rstacruz/reacco
-    system "reacco -a --api lib --github #{repo}"
+    system "reacco --literate --toc --api lib --github #{repo}"
   end
 
   desc "Uploads documentation"

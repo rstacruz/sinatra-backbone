@@ -1,6 +1,6 @@
 require 'json'
 
-# ## Sinatra::RestAPI [module]
+# ## RestAPI [module]
 # A plugin for providing rest API to models. Great for Backbone.js.
 #
 # To use this, simply `register` it to your Sinatra Application.  You can then

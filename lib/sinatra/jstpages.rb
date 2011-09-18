@@ -1,8 +1,8 @@
-# ## Sinatra::JstPages [module]
+# ## JstPages [module]
 # A Sinatra plugin that adds support for JST (JavaScript Server Templates).
 # See [JstPages example][jstx] for a full example application.
 #
-# #### Basic usage
+# ### Basic usage
 # Register the `Sinatra::JstPages` plugin in your application, and use
 # `serve_jst`.  This example serves all JST files found in `/views/**/*.jst.*`
 # (where `/views` is your views directory as defined in Sinatra's
@@ -44,7 +44,7 @@
 #
 # [sap]: http://ricostacruz.com/sinatra-assetpack
 #
-# #### Supported templates
+# ### Supported templates
 #
 # __[Jade][jade]__ (`.jst.jade`) -- Jade templates. This requires
 # [jade.js][jade]. For older browsers, you will also need [json2.js][json2],
@@ -159,7 +159,7 @@ module Sinatra
 end
 
 
-# ## Sinatra::JstPages::Engine [class]
+# ## JstPages::Engine [class]
 # A template engine.
 #
 # #### Adding support for new template engines
