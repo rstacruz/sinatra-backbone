@@ -34,12 +34,12 @@ for use in Backbone views. See <a href="https://github.com/rstacruz/sinatra-back
 application.</p></li>
 <li><p><code>Sinatra::RestAPI</code> – Provides restful API for your models for use in Backbone 
 models. See <a href="https://github.com/rstacruz/sinatra-backbone/tree/master/examples/restapi">RestAPI example</a> for a full example application.</p></li>
-</ul></section><section class="api h2 sinatra_jstpages_module"><h2 class="api" id="sinatra_jstpages_module">Sinatra::JstPages <span class="type">module</span>
+</ul></section><section class="api h2 jstpages_module"><h2 class="api" id="jstpages_module">JstPages <span class="type">module</span>
 </h2>
 <p>A Sinatra plugin that adds support for JST (JavaScript Server Templates).
 See <a href="https://github.com/rstacruz/sinatra-backbone/tree/master/examples/jstpages">JstPages example</a> for a full example application.</p>
 
-<section class=" h4 basic_usage"><h4>Basic usage</h4>
+<section class=" h3 basic_usage"><h3 id="basic_usage">Basic usage</h3>
 <pre class=" lang- prettyprint right"><code>require 'sinatra/jstpages'
 
 class App &lt; Sinatra::Base
@@ -82,13 +82,13 @@ JST['editor/edit']({name: 'Item Name'});
 
 <br class="post-pre">
 
-</section><section class=" after-pre h4 using_sinatra-assetpack"><h4 class=" after-pre">Using Sinatra-AssetPack?</h4>
+<section class=" after-pre h4 using_sinatra-assetpack"><h4 class=" after-pre">Using Sinatra-AssetPack?</h4>
 
 <p><strong>TIP:</strong> If you're using the <a href="http://ricostacruz.com/sinatra-assetpack">sinatra-assetpack</a> gem, just add <code>/jst.js</code>
 to a package.  (If you're not using Sinatra AssetPack yet, you probably
 should.)</p>
 
-</section><section class=" h4 supported_templates"><h4>Supported templates</h4>
+</section></section><section class=" h3 supported_templates"><h3 id="supported_templates">Supported templates</h3>
 <pre class=" lang- prettyprint right"><code># views/editor/edit.jst.jade
 h1= "Edit "+name
   form
@@ -140,7 +140,7 @@ Requires <a href="https://github.com/creationix/haml-js">haml.js</a>.</p>
 </h3>
 <p>Serves JST files in given <code>path</code>.</p>
 
-</section></section><section class="api h2 sinatra_jstpages_engine_class"><h2 class="api" id="sinatra_jstpages_engine_class">Sinatra::JstPages::Engine <span class="type">class</span>
+</section></section><section class="api h2 jstpages_engine_class"><h2 class="api" id="jstpages_engine_class">JstPages::Engine <span class="type">class</span>
 </h2>
 <p>A template engine.</p>
 
@@ -177,7 +177,7 @@ then use <code>JstPages.register</code>.</p>
 <p>What this returns should, in JavaScript, return a function that can be
 called with an object hash of the params to be passed onto the template.</p>
 
-</section></section><section class="api h2 sinatra_restapi_module"><h2 class="api" id="sinatra_restapi_module">Sinatra::RestAPI <span class="type">module</span>
+</section></section><section class="api h2 restapi_module"><h2 class="api" id="restapi_module">RestAPI <span class="type">module</span>
 </h2>
 <pre class=" lang- prettyprint right"><code>require 'sinatra/restapi'
 
@@ -429,12 +429,14 @@ from it's <a href="http://github.com/rstacruz/xxxxx">contributors</a>. It is spo
 <a href="http://twitter.com/rstacruz">Twitter</a> (@rstacruz)</li>
 </ul></section><aside id="toc"><h1>Sinatra-backbone</h1>
 <nav class="level-2"><h3><a href="#contents">Contents</a></h3>
-<ul></ul></nav><nav class="level-2"><h3><a href="#sinatra_jstpages_module">Sinatra::JstPages <span class="type">module</span>
+<ul></ul></nav><nav class="level-2"><h3><a href="#jstpages_module">JstPages <span class="type">module</span>
 </a></h3>
 <ul>
+<li><a href="#basic_usage">Basic usage</a></li>
+<li><a href="#supported_templates">Supported templates</a></li>
 <li><a href="#serve_jst_path_options_class_method">serve_jst<span class="args">(path, [options])</span> <span class="type">class method</span>
 </a></li>
-</ul></nav><nav class="level-2"><h3><a href="#sinatra_jstpages_engine_class">Sinatra::JstPages::Engine <span class="type">class</span>
+</ul></nav><nav class="level-2"><h3><a href="#jstpages_engine_class">JstPages::Engine <span class="type">class</span>
 </a></h3>
 <ul>
 <li><a href="#file_attribute">file <span class="type">attribute</span>
@@ -443,7 +445,7 @@ from it's <a href="http://github.com/rstacruz/xxxxx">contributors</a>. It is spo
 </a></li>
 <li><a href="#function_method">function <span class="type">method</span>
 </a></li>
-</ul></nav><nav class="level-2"><h3><a href="#sinatra_restapi_module">Sinatra::RestAPI <span class="type">module</span>
+</ul></nav><nav class="level-2"><h3><a href="#restapi_module">RestAPI <span class="type">module</span>
 </a></h3>
 <ul>
 <li><a href="#restapi_example">RestAPI example</a></li>
