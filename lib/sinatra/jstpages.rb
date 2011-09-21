@@ -202,7 +202,7 @@ module Sinatra::JstPages
   end
 
   class HamlEngine < Engine
-    def function() "Haml.compile(#{contents.inspect})"; end
+    def function() "Haml(#{contents.inspect})"; end
   end
 
   class JadeEngine < Engine
