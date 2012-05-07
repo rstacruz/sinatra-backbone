@@ -114,14 +114,14 @@ module Sinatra
       # Returns a list of JST files.
       def jst_files
         # Tuples of [ name, Engine instance ]
-        root = options[:root] or settings.views
+        root = options[:root] || settings.views
         tuples = Dir.chdir(root) {
-          Dir["**/*.jst"].map { |fn|
-            fn       =~ %r{^(.*)\.jst\.([^\.]+)$}
-            name, ext = $1, $2
-            engine    = JstPages.mappings[ext]
+          Dir["**/*.jst*"].map { |fn|
+            name   = fn.match(%r{^(.*)\.jst})[1]
+            ext    = fn.match(%r{\.(.*)$})[1]
+            engine = JstPages.mappings[ext]
 
-            [ name, engine.new(File.join(settings.views, fn)) ]  if engine
+            [ name, engine.new(File.join(root, fn)) ] if engine
           }.compact
         }
 
@@ -216,15 +216,9 @@ module Sinatra::JstPages
     end
   end
 
-  class JstEngine < Engine
-    def function
-      "function() {return #{contents.inspect};}"
-    end
-  end
-
   register 'tpl', Engine
+  register 'jst', Engine
   register 'jade', JadeEngine
   register 'haml', HamlEngine
   register 'eco', EcoEngine
-  register 'jst', JstEngine
 end
