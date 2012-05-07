@@ -112,7 +112,7 @@ module Sinatra
 
     module Helpers
       # Returns a list of JST files.
-      def jst_files
+      def jst_files(options = {})
         # Tuples of [ name, Engine instance ]
         root = options[:root] || settings.views
         tuples = Dir.chdir(root) {
