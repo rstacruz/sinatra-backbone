@@ -39,7 +39,7 @@ Acknowledgements
 License](http://www.opensource.org/licenses/mit-license.php).
 
 Sinatra-Backbone is authored and maintained by [Rico Sta. Cruz][rsc] with help 
-from it's [contributors][c]. It is sponsored by my startup, [Sinefunc, Inc][sf].
+from its [contributors][c]. It is sponsored by my startup, [Sinefunc, Inc][sf].
 
  * [My website](http://ricostacruz.com) (ricostacruz.com)
  * [Sinefunc, Inc.](http://sinefunc.com) (sinefunc.com)
