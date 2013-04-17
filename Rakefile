@@ -1,3 +1,5 @@
+require 'bundler/gem_tasks'
+
 desc "Invokes the test suite in multiple RVM environments"
 task :'test!' do
   # Override this by adding RVM_TEST_ENVS=".." in .rvmrc
