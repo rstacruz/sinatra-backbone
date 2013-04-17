@@ -118,7 +118,7 @@ module Sinatra
         tuples = Dir.chdir(root) {
           Dir["**/*.jst*"].map { |fn|
             name   = fn.match(%r{^(.*)\.jst})[1]
-            ext    = fn.match(%r{\.(.*)$})[1]
+            ext    = fn.match(%r{\.([^\.]*)$})[1]
             engine = JstPages.mappings[ext]
 
             [ name, engine.new(File.join(root, fn)) ] if engine
