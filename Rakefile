@@ -2,9 +2,9 @@ require 'bundler/gem_tasks'
 
 desc "Invokes the test suite in multiple RVM environments"
 task :'test!' do
-  %w[sinatra=1.3 sinatra=1.4].each do |sinatra|
-    system "rm Gemfile.lock"
-    system "env #{sinatra} bundle exec rake test" or abort
+  %w[1.3 1.4 master].each do |version|
+    env = "env sinatra=#{version}"
+    system("rm -f Gemfile.lock; #{env} bundle && #{env} bundle exec rake test") or abort
   end
 end
 
