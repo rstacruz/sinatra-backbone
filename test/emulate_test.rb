@@ -1,4 +1,5 @@
 require File.expand_path('../test_helper', __FILE__)
+require 'ostruct'
 
 class EmulateTest < UnitTest
   class App < Sinatra::Base
@@ -6,7 +7,7 @@ class EmulateTest < UnitTest
     disable :show_exceptions
     enable :raise_errors
 
-    rest_resource("/api/:id") { |id| FauxModel.new id }
+    rest_resource("/api/:id") { |id| FauxModel.new }
   end
 
   def app() App; end
