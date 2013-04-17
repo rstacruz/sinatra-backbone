@@ -18,7 +18,8 @@ namespace :doc do
   desc "Builds documentation"
   task :build do
     # github.com/rstacruz/reacco
-    system "reacco --literate --toc --api lib --github #{repo}"
+    analytics = "--analytics #{ENV['ANALYTICS_ID']}"  if ENV['ANALYTICS_ID']
+    system "reacco --literate --toc --api lib --github #{repo} #{analytics}"
   end
 
   desc "Uploads documentation"
