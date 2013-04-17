@@ -16,3 +16,5 @@ class UnitTest < Test::Unit::TestCase
 end
 
 DB = Sequel.connect('sqlite::memory:')
+
+puts "==> Environment: Sinatra #{Sinatra::VERSION}, Ruby #{RUBY_VERSION}"
