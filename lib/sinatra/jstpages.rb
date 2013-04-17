@@ -17,7 +17,7 @@
 #
 # You will need to link to the JST route in your layout. Make a `<script>` tag
 # where the `src='...'` attribute is the same path you provide to `serve_jst`.
-# 
+#
 #     <script type='text/javascript' src='/jst.js'></script>
 #
 # So, if you have a JST view placed in `views/editor/edit.jst.tpl`:
@@ -112,15 +112,16 @@ module Sinatra
 
     module Helpers
       # Returns a list of JST files.
-      def jst_files
+      def jst_files(options = {})
         # Tuples of [ name, Engine instance ]
-        tuples = Dir.chdir(settings.views) {
-          Dir["**/*.jst.*"].map { |fn|
-            fn       =~ %r{^(.*)\.jst\.([^\.]+)$}
-            name, ext = $1, $2
-            engine    = JstPages.mappings[ext]
+        root = options[:root] || settings.views
+        tuples = Dir.chdir(root) {
+          Dir["**/*.jst*"].map { |fn|
+            name   = fn.match(%r{^(.*)\.jst})[1]
+            ext    = fn.match(%r{\.(.*)$})[1]
+            engine = JstPages.mappings[ext]
 
-            [ name, engine.new(File.join(settings.views, fn)) ]  if engine
+            [ name, engine.new(File.join(root, fn)) ] if engine
           }.compact
         }
 
@@ -135,7 +136,7 @@ module Sinatra
       def serve_jst(path, options={})
         get path do
           content_type :js
-          jsts = jst_files.map { |(name, engine)|
+          jsts = jst_files(options).map { |(name, engine)|
             %{
               JST[#{name.inspect}] = function() {
                 if (!c[#{name.inspect}]) c[#{name.inspect}] = (#{engine.function});
@@ -216,6 +217,7 @@ module Sinatra::JstPages
   end
 
   register 'tpl', Engine
+  register 'jst', Engine
   register 'jade', JadeEngine
   register 'haml', HamlEngine
   register 'eco', EcoEngine
