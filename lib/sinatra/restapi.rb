@@ -269,13 +269,12 @@ module Sinatra::RestAPI
     # Otherwise, the params will be returned as is.
     #
     def rest_params
-      if File.fnmatch('*/json', request.content_type)
+      if File.fnmatch('*/json', request.content_type.split(/ \;/).map{|x|x.strip()}.compact.first)
         JSON.parse request.body.read
 
       elsif params['model']
         # Account for Backbone.emulateJSON.
         JSON.parse params['model']
-
       else
         params
       end

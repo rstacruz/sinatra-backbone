@@ -8,6 +8,9 @@ class EmulateTest < UnitTest
     enable :raise_errors
 
     rest_resource("/api/:id") { |id| FauxModel.new }
+    put "/firefox/:id" do
+      rest_params.to_json
+    end
   end
 
   def app() App; end
@@ -24,6 +27,14 @@ class EmulateTest < UnitTest
 
     post "/api/2", :model => { :two => 2 }.to_json
     assert json_response == { 'a' => 'b' }
+  end
+
+  test "parse rest_params properly with charset encoding included within content_type" do
+    put "/firefox/2", :model => { :one => 1 }.to_json, :content_type => "application/json"
+    assert json_response == {"one" => 1}
+
+    put "/firefox/2", :model => { :two => 2 }.to_json, :content_type => "application/json; charset=UTF-8"
+    assert json_response == {"two" => 2}
   end
 end
 
