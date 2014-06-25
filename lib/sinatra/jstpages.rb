@@ -121,7 +121,7 @@ module Sinatra
             ext    = fn.match(%r{\.([^\.]*)$})[1]
             engine = JstPages.mappings[ext]
 
-            [ name, engine.new(File.join(root, fn)) ] if engine
+            [ name, engine.new(name, File.join(root, fn)) ] if engine
           }.compact
         }
 
@@ -136,14 +136,9 @@ module Sinatra
       def serve_jst(path, options={})
         get path do
           content_type :js
-          jsts = jst_files(options).map { |(name, engine)|
-            %{
-              JST[#{name.inspect}] = function() {
-                if (!c[#{name.inspect}]) c[#{name.inspect}] = (#{engine.function});
-                return c[#{name.inspect}].apply(this, arguments);
-              };
-          }.strip.gsub(/^ {12}/, '')
-          }
+          jsts = jst_files(options).map do |(name, engine)|
+            engine.compile!
+          end
 
           %{
             (function(){
@@ -171,7 +166,7 @@ end
 #
 #     module Sinatra::JstPages
 #       class MyEngine < Engine
-#         def function() "My.compile(#{contents.inspect})"; end
+#         def compile!() "My.compile(#{contents.inspect})"; end
 #       end
 #
 #       register 'my', MyEngine
@@ -179,10 +174,16 @@ end
 #
 module Sinatra::JstPages
   class Engine
+    # ### name [attribute]
+    # The name of the template.
+    attr_reader :name
+
     # ### file [attribute]
     # The string path of the template file.
     attr_reader :file
-    def initialize(file)
+
+    def initialize(name, file)
+      @name = name
       @file = file
     end
 
@@ -192,27 +193,59 @@ module Sinatra::JstPages
       File.read(@file)
     end
 
+    def wrap_jst(name)
+      compiled_contents = contents
+      compiled_contents = yield if block_given?
+
+      <<JS.strip.gsub(/^ {12}/, '')
+JST[#{name.inspect}] = function() {
+    if (!c[#{name.inspect}]) c[#{name.inspect}] = (#{compiled_contents});
+    return c[#{name.inspect}].apply(this, arguments);
+  };
+JS
+    end
+
     # ### function [method]
     # The JavaScript function to invoke on the precompile'd object.
     #
     # What this returns should, in JavaScript, return a function that can be
     # called with an object hash of the params to be passed onto the template.
-    def function
-      "_.template(#{contents.inspect})"
+    def compile!
+      wrap_jst(name) do
+        "_.template(#{contents.inspect})"
+      end
     end
   end
 
   class HamlEngine < Engine
-    def function() "Haml(#{contents.inspect})"; end
+    def compile!
+      wrap_jst(name) do
+        "Haml(#{contents.inspect})";
+      end
+    end
   end
 
   class JadeEngine < Engine
-    def function() "require('jade').compile(#{contents.inspect})"; end
+    def compile!
+      wrap_jst(name) do
+        "require('jade').compile(#{contents.inspect})"
+      end
+    end
   end
 
   class EcoEngine < Engine
-    def function
-      "function() { var a = arguments.slice(); a.unshift(#{contents.inspect}); return eco.compile.apply(eco, a); }"
+    def compile!
+      wrap_jst(name) do
+        "function() { var a = arguments.slice(); a.unshift(#{contents.inspect}); return eco.compile.apply(eco, a); }"
+      end
+    end
+  end
+
+  class HamlCoffeeEngine < Engine
+    def compile!
+      HamlCoffeeAssets.config.context = false
+      HamlCoffeeAssets::Compiler.compile(name, contents, true).
+        match(/^  window.JST(.*)\n  };$/m)[0].gsub(/^  window.JST/, 'JST')
     end
   end
 
@@ -221,4 +254,8 @@ module Sinatra::JstPages
   register 'jade', JadeEngine
   register 'haml', HamlEngine
   register 'eco', EcoEngine
+
+  if defined?(HamlCoffeeAssets)
+    register 'hamlc', HamlCoffeeEngine
+  end
 end
